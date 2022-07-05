@@ -1,12 +1,12 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Account {
     private final String name;
+    private static final String USERNAME_PATTERN = "(?=^.{3,19}$)([A-Za-z]{1,} [A-Za-z]{1,})";
 
     public Account(String name) {
         this.name = name;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public boolean checkNameToEmboss() {
@@ -23,8 +23,7 @@ public class Account {
                     System.out.println("В строке не должно быть больше одного пробела. Пробел не должен быть в начале и в конце строки.");
                     return false;
                 }
-            }
-            else {
+            } else {
                 System.out.println("Строка должна содержать один пробел. Пробел не должен быть в начале и в конце строки.");
                 return false;
             }
@@ -42,5 +41,11 @@ public class Account {
             count += 1;
         }
         return count;
+    }
+
+    public boolean checkNameToEmbossRegexp() {
+        final Pattern pattern = Pattern.compile(USERNAME_PATTERN);
+        Matcher matcher = pattern.matcher(name);
+        return matcher.matches();
     }
 }
