@@ -1,4 +1,5 @@
 
+import io.qameta.allure.junit4.DisplayName;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -32,16 +33,18 @@ public class CheckNameToEmbossParameterizedTest {
                 {new Account(""), false},
                 {new Account(" "), false},
                 {new Account("   "), false},
-                {new Account("\n"), false},
-                {new Account("\n" + " " + "\n"), false},
-                {new Account(RandomStringUtils.randomAlphabetic(6) + "\n" + " " + RandomStringUtils.randomAlphabetic(4)), true},
         };
     }
 
     @Test
+    @DisplayName("Check method nameToEmboss with different data")
     public void checkNameToEmbossTest(){
-        System.out.println(account.getName() + " " + account.getName().length());
-
         Assert.assertEquals(account.checkNameToEmboss(), expected);
+    }
+
+    @Test
+    @DisplayName("Check method nameToEmbossRegexp with different data")
+    public void checkNameToEmbossRegexpTest(){
+        Assert.assertEquals(account.checkNameToEmbossRegexp(), expected);
     }
 }
