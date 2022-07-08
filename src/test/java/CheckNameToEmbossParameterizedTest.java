@@ -16,7 +16,7 @@ public class CheckNameToEmbossParameterizedTest {
         this.expected = expected;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Name: {0}, expected: {1}")
     public static Object[][] getAccountData() {
         return new Object[][]{
                 {new Account(RandomStringUtils.randomAlphabetic(3) + " " + RandomStringUtils.randomAlphabetic(5)), true},
@@ -33,18 +33,19 @@ public class CheckNameToEmbossParameterizedTest {
                 {new Account(""), false},
                 {new Account(" "), false},
                 {new Account("   "), false},
+                {new Account(null), false}
         };
     }
 
     @Test
     @DisplayName("Check method nameToEmboss with different data")
-    public void checkNameToEmbossTest(){
+    public void checkNameToEmbossTest() {
         Assert.assertEquals(account.checkNameToEmboss(), expected);
     }
 
     @Test
     @DisplayName("Check method nameToEmbossRegexp with different data")
-    public void checkNameToEmbossRegexpTest(){
+    public void checkNameToEmbossRegexpTest() {
         Assert.assertEquals(account.checkNameToEmbossRegexp(), expected);
     }
 }
